@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -37,16 +38,19 @@ class MainActivity : AppCompatActivity() {
         BookDbHelper.init(this)
         val dbHelper = BookDbHelper.getInstance()
 
-        dbHelper?.addAuthor("aaa")
-        dbHelper?.addAuthor("bbb")
-        dbHelper?.addPublisher("111")
-        dbHelper?.addPublisher("222")
+//        dbHelper?.addAuthor("aaa")
+//        dbHelper?.addAuthor("bbb")
+//        dbHelper?.addPublisher("111")
+//        dbHelper?.addPublisher("222")
+
+        updateAuthorList()
+        updatePublisherList()
 
         dataBinding.btAdd.setOnClickListener {
             dbHelper?.addBook(
-                dataBinding.edTitle.text.toString(),
-                dataBinding.edAuthor.text.toString(),
-                dataBinding.edPublisher.text.toString()
+                dataBinding.edTitle.text.toString(),"",""
+//                dataBinding.edAuthor.text.toString(),
+//                dataBinding.edPublisher.text.toString()
             )
         }
 
@@ -64,9 +68,9 @@ class MainActivity : AppCompatActivity() {
 
             val book = Book(
                 -1,
-                dataBinding.edTitle.text.toString(),
-                dataBinding.edAuthor.text.toString(),
-                dataBinding.edPublisher.text.toString()
+                dataBinding.edTitle.text.toString(),"",""
+//                dataBinding.edAuthor.text.toString(),
+//                dataBinding.edPublisher.text.toString()
             )
             val books = dbHelper?.queryBooks(book)
             books?.let {
@@ -153,5 +157,18 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+    }
+    fun updateAuthorList(){
+        val spAuthorAdapter = BookDbHelper.getInstance()?.getALLAuthors().let {
+            ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, it as List<String>)
+        }
+        dataBinding.spAuthor.adapter = spAuthorAdapter
+    }
+
+    fun updatePublisherList(){
+        val spPublisherAdapter = BookDbHelper.getInstance()?.getALLPublishers().let {
+            ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, it as List<String>)
+        }
+        dataBinding.spPublisher.adapter = spPublisherAdapter
     }
 }
