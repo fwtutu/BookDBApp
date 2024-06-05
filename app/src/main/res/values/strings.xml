@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BookDBApp</string>
+    <string name="title">書名</string>
+    <string name="author">作者</string>
+    <string name="publisher">出版商</string>
+    <string name="add">新增</string>
+    <string name="list">列表</string>
+    <string name="query">查詢</string>
+    <string name="del">刪除</string>
+    <string name="update">修改</string>
+    <string name="cancel">取消</string>
+    <string name="ok">確定</string>
+</resources>
