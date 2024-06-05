@@ -47,10 +47,13 @@ class MainActivity : AppCompatActivity() {
         updatePublisherList()
 
         dataBinding.btAdd.setOnClickListener {
+            val selectedAuther = (dataBinding.spAuthor.selectedView as TextView).text.toString()
+            val selectedPublisher =
+                (dataBinding.spPublisher.selectedView as TextView).text.toString()
             dbHelper?.addBook(
-                dataBinding.edTitle.text.toString(),"",""
-//                dataBinding.edAuthor.text.toString(),
-//                dataBinding.edPublisher.text.toString()
+                dataBinding.edTitle.text.toString(),
+                selectedAuther,
+                selectedPublisher
             )
         }
 
