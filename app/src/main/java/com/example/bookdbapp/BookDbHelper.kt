@@ -195,4 +195,32 @@ class BookDbHelper private constructor(val context: Context) :
         writableDatabase.insert(PUBLISHER_TABLE, null, cv)
         writableDatabase.close()
     }
+
+    fun getALLAuthors(): List<String>{
+        val c = readableDatabase.query(AUTHOR_TABLE, arrayOf(AUTHOR_NAME),
+            null,null,null,null,null)
+        val authors = arrayListOf<String>()
+
+        if (c.count !=0) {
+            c.moveToFirst()
+            do {
+                authors.add(c.getString(0))
+            } while (c.moveToNext())
+        }
+            return authors
+    }
+
+    fun getALLPublishers(): List<String>{
+        val c = readableDatabase.query(PUBLISHER_TABLE, arrayOf(PUBLISHER_NAME),
+            null,null,null,null,null)
+        val publishers = arrayListOf<String>()
+
+        if (c.count !=0) {
+            c.moveToFirst()
+            do {
+                publishers.add(c.getString(0))
+            } while (c.moveToNext())
+        }
+        return publishers
+    }
 }
